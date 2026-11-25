@@ -1,25 +1,31 @@
 @import "tailwindcss";
 
+/* YouTube dark theme palette */
 :root {
-  --bg: #0b0b0f;
-  --bg-elev: #14141b;
-  --bg-hover: #1d1d27;
-  --border: #262633;
-  --fg: #ececf1;
-  --fg-muted: #9a9aab;
-  --accent: #ff6600; /* Hacker News orange */
+  --bg: #0f0f0f;
+  --bg-elev: #212121;
+  --bg-hover: #272727;
+  --bg-hover-strong: #3f3f3f;
+  --border: #303030;
+  --fg: #f1f1f1;
+  --fg-muted: #aaaaaa;
+  --accent: #ff0033; /* YouTube red */
+  --link: #3ea6ff; /* YouTube link blue */
+  --hn: #ff6600; /* Hacker News orange, for HN-specific bits */
 }
 
 @theme inline {
   --color-bg: var(--bg);
   --color-elev: var(--bg-elev);
   --color-hover: var(--bg-hover);
+  --color-hover-strong: var(--bg-hover-strong);
   --color-line: var(--border);
   --color-fg: var(--fg);
   --color-muted: var(--fg-muted);
   --color-accent: var(--accent);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
+  --color-link: var(--link);
+  --color-hn: var(--hn);
+  --font-sans: var(--font-roboto), "Roboto", "Arial", sans-serif;
 }
 
 html {
@@ -38,9 +44,3 @@ body {
   scrollbar-width: none;
 }
 
-.line-clamp-2 {
-  display: -webkit-box;
-  -webkit-line-clamp: 2;
-  -webkit-box-orient: vertical;
-  overflow: hidden;
-}

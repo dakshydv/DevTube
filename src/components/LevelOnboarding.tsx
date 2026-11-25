@@ -21,14 +21,14 @@ export default function LevelOnboarding() {
             <button
               key={l.slug}
               onClick={() => actions.setLevel(active ? "all" : (l.slug as Level))}
-              className={`flex items-center gap-3 rounded-xl border px-4 py-3 text-left transition ${
-                active ? "border-accent bg-accent/10" : "border-line bg-elev hover:bg-hover"
+              className={`flex items-center gap-3 rounded-xl px-4 py-3 text-left transition-colors ${
+                active ? "bg-fg text-bg" : "bg-hover hover:bg-hover-strong"
               }`}
             >
-              <Icon className={`h-5 w-5 shrink-0 ${active ? "text-accent" : "text-muted"}`} />
+              <Icon className="h-5 w-5 shrink-0" />
               <span>
                 <span className="block text-sm font-medium">{l.name}</span>
-                <span className="block text-xs text-muted">{l.hint}</span>
+                <span className={`block text-xs ${active ? "text-bg/70" : "text-muted"}`}>{l.hint}</span>
               </span>
             </button>
           );

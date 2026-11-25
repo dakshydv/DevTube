@@ -2,22 +2,13 @@ import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
 import { Suspense } from "react";
-import { ArrowUp, ExternalLink, MessageSquare, Route } from "lucide-react";
-import LevelBadge from "@/components/LevelBadge";
-import VideoCard from "@/components/VideoCard";
+import { ListVideo } from "lucide-react";
+import ChannelAvatar from "@/components/ChannelAvatar";
 import WatchActions from "@/components/WatchActions";
 import PathNav from "@/components/PathNav";
-import {
-  CATEGORY_MAP,
-  LEVELS,
-  VIDEOS,
-  getVideo,
-  hnUrl,
-  pathsContaining,
-  relatedVideos,
-  LEVEL_RANK,
-  type Video,
-} from "@/lib/data";
+import UpNext from "@/components/UpNext";
+import { LevelChip } from "@/components/VideoCard";
+import { CATEGORY_MAP, LEVELS, formatDuration, lobstersUrl, shortNumber, VIDEOS, getVideo, hnUrl, pathsContaining, relatedVideos, type Video } from "@/lib/data";
 
 export function generateStaticParams() {
   return VIDEOS.map((v) => ({ id: v.id }));
@@ -35,24 +26,23 @@ export default async function WatchPage({ params }: PageProps<"/watch/[id]">) {
   if (!video) notFound();
 
   const cat = CATEGORY_MAP[video.category];
-  const related = relatedVideos(video, 18);
+  const related = relatedVideos(video, 30).map((v) => ({ ...v, ytTitle: null }));
   const paths = pathsContaining(video.id);
   const pathVideos: Record<string, Video> = {};
-  for (const p of paths) for (const pid of p.videos) {
-    const pv = getVideo(pid);
-    if (pv) pathVideos[pid] = pv;
-  }
-  const levelUp =
-    video.level !== "advanced"
-      ? related.find((r) => LEVEL_RANK[r.level] === LEVEL_RANK[video.level] + 1 && r.category === video.category)
-      : undefined;
+  for (const p of paths)
+    for (const pid of p.videos) {
+      const pv = getVideo(pid);
+      if (pv) pathVideos[pid] = { ...pv, ytTitle: null };
+    }
   const levelInfo = LEVELS.find((l) => l.slug === video.level)!;
   const hn = hnUrl(video);
+  const lb = lobstersUrl(video);
+  const otherTags = video.tags.filter((t) => t !== video.category);
 
   return (
-    <div className="mx-auto flex max-w-[1700px] flex-col gap-6 px-4 py-6 sm:px-6 xl:flex-row">
+    <div className="mx-auto flex max-w-[1754px] flex-col gap-6 px-4 pb-10 pt-0 sm:px-6 sm:pt-6 lg:flex-row">
       <div className="min-w-0 flex-1">
-        <div className="aspect-video w-full overflow-hidden rounded-xl bg-black ring-1 ring-line">
+        <div className="-mx-4 aspect-video overflow-hidden bg-black sm:mx-0 sm:rounded-xl">
           <iframe
             className="h-full w-full"
             src={`https://www.youtube-nocookie.com/embed/${video.id}?rel=0&modestbranding=1&autoplay=1`}
@@ -63,111 +53,100 @@ export default async function WatchPage({ params }: PageProps<"/watch/[id]">) {
           />
         </div>
 
-        <h1 className="mt-4 text-xl font-semibold leading-snug sm:text-2xl">{video.title}</h1>
-        {video.ytTitle && <p className="mt-1 text-sm text-muted">On YouTube: “{video.ytTitle}”</p>}
+        <h1 className="mt-3 text-lg font-bold leading-6 sm:text-xl sm:leading-7">{video.title}</h1>
 
-        <div className="mt-3 flex flex-wrap items-center justify-between gap-3">
-          <div className="flex flex-wrap items-center gap-3 text-sm">
-            <span className="font-medium">{video.channel}</span>
+        <div className="mt-3 flex flex-col gap-3 xl:flex-row xl:items-center xl:justify-between">
+          <div className="flex min-w-0 items-center gap-3">
+            <ChannelAvatar name={video.channel} size={40} />
+            <div className="min-w-0">
+              <p className="truncate text-base font-medium">{video.channel}</p>
+              <p className="text-xs text-muted">{cat.name}</p>
+            </div>
             <Link
               href={`/c/${cat.slug}`}
-              className="inline-flex items-center gap-1.5 rounded-full bg-hover px-3 py-1 text-xs hover:bg-white/15"
+              className="ml-3 inline-flex h-9 shrink-0 items-center rounded-full bg-fg px-4 text-sm font-medium text-bg hover:bg-[#d9d9d9]"
             >
-              <span className="h-2 w-2 rounded-full" style={{ background: cat.color }} />
-              {cat.name}
+              More {cat.short}
             </Link>
-            <LevelBadge level={video.level} />
           </div>
-          <WatchActions id={video.id} />
+          <WatchActions id={video.id} hn={hn} comments={video.comments} />
         </div>
 
-        <div className="mt-4 rounded-xl bg-elev p-4 text-sm ring-1 ring-line">
-          <div className="flex flex-wrap items-center gap-x-5 gap-y-2">
-            {video.points > 0 ? (
+        {/* On small screens the path/course playlist goes right under the video, like YouTube's mobile app. */}
+        <div className="mt-4 lg:hidden">
+          <Suspense>
+            <PathNav currentId={video.id} paths={paths} videos={pathVideos} />
+          </Suspense>
+        </div>
+
+        <div className="mt-3 rounded-xl bg-hover p-3 text-sm leading-5">
+          <p className="flex flex-wrap items-center gap-x-2 font-medium">
+            {video.points > 0 && (
               <>
-                <span className="inline-flex items-center gap-1">
-                  <ArrowUp className="h-4 w-4 text-accent" /> <b>{video.points}</b> points on Hacker News
-                </span>
-                <span className="inline-flex items-center gap-1">
-                  <MessageSquare className="h-4 w-4" /> {video.comments} comments
-                </span>
-                {video.hnYear && <span className="text-muted">Posted {video.hnYear}</span>}
-              </>
-            ) : (
-              <span className="text-muted">Hand-picked beginner classic</span>
-            )}
-            {hn && (
-              <a
-                href={hn}
-                target="_blank"
-                rel="noreferrer"
-                className="inline-flex items-center gap-1 text-accent hover:underline"
-              >
-                Read the HN discussion <ExternalLink className="h-3.5 w-3.5" />
-              </a>
-            )}
-            <a
-              href={`https://www.youtube.com/watch?v=${video.id}`}
-              target="_blank"
-              rel="noreferrer"
-              className="inline-flex items-center gap-1 text-muted hover:text-fg hover:underline"
-            >
-              Open on YouTube <ExternalLink className="h-3.5 w-3.5" />
-            </a>
-          </div>
-          <p className="mt-3 text-muted">
-            <b className="text-fg">{levelInfo.name}:</b> {levelInfo.hint.toLowerCase()}.{" "}
-            {video.tags.length > 1 && (
-              <>
-                Also covers{" "}
-                {video.tags
-                  .filter((t) => t !== video.category)
-                  .map((t, i, arr) => (
-                    <span key={t}>
-                      <Link href={`/c/${t}`} className="text-fg underline decoration-line underline-offset-2 hover:decoration-fg">
-                        {CATEGORY_MAP[t].short}
-                      </Link>
-                      {i < arr.length - 1 ? ", " : "."}
-                    </span>
-                  ))}
+                <span>{video.points.toLocaleString()} points on Hacker News</span>
+                <span>{video.comments.toLocaleString()} comments</span>
               </>
             )}
+            {video.lbScore ? <span>{video.lbScore} points on Lobsters</span> : null}
+            {video.views ? <span>{shortNumber(video.views)} views</span> : null}
+            {video.curated && <span>Editor&apos;s pick · hand-picked beginner classic</span>}
+            {video.inspire && <span>Inspiration · watch the future get built</span>}
+            {video.year && <span>{video.year}</span>}
+            <span className="ml-1 flex flex-wrap gap-x-2 text-link">
+              <Link href={`/c/${cat.slug}`}>#{cat.short.replace(/[^\w]/g, "")}</Link>
+              {otherTags.map((t) => (
+                <Link key={t} href={`/c/${t}`}>
+                  #{CATEGORY_MAP[t].short.replace(/[^\w]/g, "")}
+                </Link>
+              ))}
+            </span>
           </p>
+          {video.ytTitle && <p className="mt-2">{video.ytTitle}</p>}
+          <p className="mt-2 flex flex-wrap items-center gap-2">
+            <LevelChip level={video.level} />
+            <span>{levelInfo.hint}.</span>
+            {video.duration ? <span className="text-muted">Length {formatDuration(video.duration)}</span> : null}
+          </p>
+          {video.course && <p className="mt-2">From the course “{video.course}”.</p>}
+          {hn && (
+            <p className="mt-2">
+              Read what Hacker News thought:{" "}
+              <a href={hn} target="_blank" rel="noreferrer" className="text-link">
+                {hn.replace("https://", "")}
+              </a>
+            </p>
+          )}
+          {lb && (
+            <p className="mt-2">
+              Discussion on Lobsters:{" "}
+              <a href={lb} target="_blank" rel="noreferrer" className="text-link">
+                {lb.replace("https://", "")}
+              </a>
+            </p>
+          )}
+          {paths.length > 0 && (
+            <div className="mt-3 flex flex-wrap gap-2">
+              {paths.map((p) => (
+                <Link
+                  key={p.slug}
+                  href={`/paths/${p.slug}`}
+                  className="inline-flex items-center gap-2 rounded-lg bg-hover-strong px-3 py-1.5 font-medium hover:bg-[#4f4f4f]"
+                >
+                  <ListVideo className="h-4 w-4" /> Part of “{p.name}”
+                </Link>
+              ))}
+            </div>
+          )}
         </div>
-
-        {paths.length > 0 && (
-          <div className="mt-4 flex flex-wrap gap-2">
-            {paths.map((p) => (
-              <Link
-                key={p.slug}
-                href={`/paths/${p.slug}`}
-                className="inline-flex items-center gap-1.5 rounded-full border border-line px-3 py-1.5 text-xs hover:bg-hover"
-              >
-                <Route className="h-3.5 w-3.5 text-accent" /> Part of “{p.name}”
-              </Link>
-            ))}
-          </div>
-        )}
       </div>
 
-      <aside className="w-full shrink-0 xl:w-[400px]">
-        <Suspense>
-          <PathNav currentId={video.id} paths={paths} videos={pathVideos} />
-        </Suspense>
-        {levelUp && (
-          <div className="mb-4">
-            <h3 className="mb-2 text-sm font-semibold text-muted">Ready to level up?</h3>
-            <VideoCard video={levelUp} compact />
-          </div>
-        )}
-        <h3 className="mb-2 text-sm font-semibold text-muted">Up next in {cat.short}</h3>
-        <div className="flex flex-col gap-1">
-          {related
-            .filter((r) => r.id !== levelUp?.id)
-            .map((r) => (
-              <VideoCard key={r.id} video={r} compact />
-            ))}
+      <aside className="w-full shrink-0 lg:w-[402px]">
+        <div className="hidden lg:block">
+          <Suspense>
+            <PathNav currentId={video.id} paths={paths} videos={pathVideos} />
+          </Suspense>
         </div>
+        <UpNext related={related} level={video.level} cat={cat} />
       </aside>
     </div>
   );

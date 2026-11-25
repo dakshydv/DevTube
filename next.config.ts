@@ -5,6 +5,13 @@ const nextConfig: NextConfig = {
   cacheComponents: true,
   partialPrefetching: true,
   reactCompiler: true,
+  async redirects() {
+    return [
+      { source: "/collections", destination: "/categories", permanent: true },
+      // Browse was merged into Home; query strings (?q=, ?sort=…) carry over.
+      { source: "/browse", destination: "/", permanent: true },
+    ];
+  },
   turbopack: {
     rules: {
       "*.css": {

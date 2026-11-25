@@ -1,32 +1,43 @@
 "use client";
 
-import { Bookmark, BookmarkCheck, CheckCircle2, Circle } from "lucide-react";
+import { Check, CircleCheck, Clock, ExternalLink, MessageSquare } from "lucide-react";
 import { actions, useUserState } from "@/lib/store";
 
-export default function WatchActions({ id }: { id: string }) {
+const PILL = "inline-flex h-9 shrink-0 items-center gap-2 rounded-full px-4 text-sm font-medium transition-colors";
+
+/** The pill row under the player (YouTube's like/share/save row). */
+export default function WatchActions({ id, hn, comments }: { id: string; hn: string | null; comments: number }) {
   const { watched, saved } = useUserState();
   const isWatched = watched.includes(id);
   const isSaved = saved.includes(id);
   return (
-    <div className="flex flex-wrap gap-2">
+    <div className="no-scrollbar flex gap-2 overflow-x-auto">
       <button
         onClick={() => actions.toggleWatched(id)}
-        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-          isWatched ? "bg-emerald-500/20 text-emerald-300" : "bg-hover hover:bg-white/15"
-        }`}
+        className={`${PILL} ${isWatched ? "bg-fg text-bg hover:bg-[#d9d9d9]" : "bg-hover hover:bg-hover-strong"}`}
       >
-        {isWatched ? <CheckCircle2 className="h-4 w-4" /> : <Circle className="h-4 w-4" />}
-        {isWatched ? "Watched" : "Mark as watched"}
+        <CircleCheck className="h-5 w-5" />
+        {isWatched ? "Watched" : "Mark watched"}
       </button>
-      <button
-        onClick={() => actions.toggleSaved(id)}
-        className={`inline-flex items-center gap-2 rounded-full px-4 py-2 text-sm font-medium transition ${
-          isSaved ? "bg-accent/20 text-accent" : "bg-hover hover:bg-white/15"
-        }`}
-      >
-        {isSaved ? <BookmarkCheck className="h-4 w-4" /> : <Bookmark className="h-4 w-4" />}
+      <button onClick={() => actions.toggleSaved(id)} className={`${PILL} bg-hover hover:bg-hover-strong`}>
+        {isSaved ? <Check className="h-5 w-5" /> : <Clock className="h-5 w-5" />}
         {isSaved ? "Saved" : "Watch later"}
       </button>
+      {hn && (
+        <a href={hn} target="_blank" rel="noreferrer" className={`${PILL} bg-hover hover:bg-hover-strong`}>
+          <MessageSquare className="h-5 w-5" />
+          {comments > 0 ? `${comments} on HN` : "HN"}
+        </a>
+      )}
+      <a
+        href={`https://www.youtube.com/watch?v=${id}`}
+        target="_blank"
+        rel="noreferrer"
+        className={`${PILL} bg-hover hover:bg-hover-strong`}
+      >
+        <ExternalLink className="h-5 w-5" />
+        YouTube
+      </a>
     </div>
   );
 }

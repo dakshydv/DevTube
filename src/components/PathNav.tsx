@@ -2,13 +2,14 @@
 
 import Link from "next/link";
 import { useSearchParams } from "next/navigation";
-import { ChevronRight, Route } from "lucide-react";
+import { SkipForward } from "lucide-react";
 import type { LearningPath, Video } from "@/lib/meta";
+import { useUserState } from "@/lib/store";
 import VideoCard from "./VideoCard";
 
 /**
- * When the watch page is opened from a learning path (?path=slug), show the playlist with
- * the current position and a "next" button. Otherwise show nothing.
+ * When the watch page is opened from a learning path (?path=slug), show the playlist panel YouTube shows
+ * next to the player. Otherwise show nothing.
  */
 export default function PathNav({
   currentId,
@@ -20,43 +21,46 @@ export default function PathNav({
   videos: Record<string, Video>;
 }) {
   const params = useSearchParams();
+  const { watched } = useUserState();
   const slug = params.get("path");
   const path = paths.find((p) => p.slug === slug) ?? null;
   if (!path) return null;
   const idx = path.videos.indexOf(currentId);
   const next = idx >= 0 && idx < path.videos.length - 1 ? videos[path.videos[idx + 1]] : null;
+  const done = path.videos.filter((id) => watched.includes(id)).length;
 
   return (
-    <div className="mb-6 overflow-hidden rounded-xl border border-line bg-elev">
-      <div className="flex items-center justify-between border-b border-line px-4 py-3">
-        <Link href={`/paths/${path.slug}`} className="min-w-0">
-          <div className="flex items-center gap-1.5 text-[11px] uppercase tracking-wide text-muted">
-            <Route className="h-3.5 w-3.5" /> Learning path
-          </div>
-          <div className="truncate font-semibold hover:underline">{path.name}</div>
-        </Link>
-        <span className="shrink-0 text-xs text-muted">
-          {idx + 1} / {path.videos.length}
-        </span>
+    <div className="mb-6 overflow-hidden rounded-xl border border-line">
+      <div className="flex items-start justify-between gap-2 bg-elev px-4 pb-3 pt-3">
+        <div className="min-w-0">
+          <Link href={`/paths/${path.slug}`} className="line-clamp-1 text-xl font-bold hover:underline">
+            {path.name}
+          </Link>
+          <p className="mt-1 text-xs text-muted">
+            {path.kind === "course" ? "Course" : "Learning path"} · {idx + 1} / {path.videos.length} · {done} watched
+          </p>
+        </div>
+        {next && (
+          <Link
+            href={`/watch/${next.id}?path=${path.slug}`}
+            title={`Next: ${next.title}`}
+            className="inline-flex h-9 shrink-0 items-center gap-1.5 rounded-full bg-fg px-3 text-sm font-medium text-bg hover:bg-[#d9d9d9]"
+          >
+            <SkipForward className="h-4 w-4 fill-bg" /> Next
+          </Link>
+        )}
       </div>
-      {next && (
-        <Link
-          href={`/watch/${next.id}?path=${path.slug}`}
-          className="flex items-center justify-between gap-2 bg-accent/10 px-4 py-2.5 text-sm hover:bg-accent/20"
-        >
-          <span className="truncate">
-            <span className="text-muted">Next: </span>
-            {next.title}
-          </span>
-          <ChevronRight className="h-4 w-4 shrink-0" />
-        </Link>
-      )}
-      <div className="no-scrollbar max-h-[360px] overflow-y-auto p-2">
+      <div className="no-scrollbar max-h-[400px] overflow-y-auto py-2 pr-2">
         {path.videos.map((id, i) =>
           videos[id] ? (
-            <div key={id} className={id === currentId ? "rounded-lg bg-hover" : ""}>
-              <VideoCard video={videos[id]} href={`/watch/${id}?path=${path.slug}`} compact index={i + 1} />
-            </div>
+            <VideoCard
+              key={id}
+              video={videos[id]}
+              href={`/watch/${id}?path=${path.slug}`}
+              compact
+              index={i + 1}
+              active={id === currentId}
+            />
           ) : null,
         )}
       </div>

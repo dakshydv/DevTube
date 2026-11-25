@@ -1,0 +1,552 @@
+{
+ "ai-ml": [
+  {
+   "slug": "llms",
+   "name": "LLMs & transformers"
+  },
+  {
+   "slug": "neural-networks",
+   "name": "Neural networks & deep learning"
+  },
+  {
+   "slug": "classic-ml",
+   "name": "Classic ML & statistics"
+  },
+  {
+   "slug": "vision-generative",
+   "name": "Vision & generative models"
+  },
+  {
+   "slug": "reinforcement-learning",
+   "name": "Reinforcement learning & game AI"
+  },
+  {
+   "slug": "research",
+   "name": "Research & papers explained"
+  },
+  {
+   "slug": "people-future",
+   "name": "People, history & the future of AI"
+  }
+ ],
+ "math": [
+  {
+   "slug": "linear-algebra",
+   "name": "Linear algebra"
+  },
+  {
+   "slug": "calculus-analysis",
+   "name": "Calculus & analysis"
+  },
+  {
+   "slug": "probability-statistics",
+   "name": "Probability & statistics"
+  },
+  {
+   "slug": "number-theory",
+   "name": "Numbers & number theory"
+  },
+  {
+   "slug": "geometry-topology",
+   "name": "Geometry, topology & visual math"
+  },
+  {
+   "slug": "puzzles-recreational",
+   "name": "Puzzles & recreational math"
+  }
+ ],
+ "algorithms": [
+  {
+   "slug": "data-structures",
+   "name": "Data structures"
+  },
+  {
+   "slug": "graph-algorithms",
+   "name": "Graphs & search"
+  },
+  {
+   "slug": "complexity-theory",
+   "name": "Complexity & theory of computation"
+  },
+  {
+   "slug": "sorting-dp",
+   "name": "Sorting, recursion & dynamic programming"
+  },
+  {
+   "slug": "codes-compression",
+   "name": "Codes, compression & signals"
+  },
+  {
+   "slug": "quantum-computing",
+   "name": "Quantum computing"
+  },
+  {
+   "slug": "cs-courses",
+   "name": "Algorithms courses & lectures"
+  },
+  {
+   "slug": "cs-concepts",
+   "name": "Computing concepts explained"
+  }
+ ],
+ "languages": [
+  {
+   "slug": "c-cpp",
+   "name": "C & C++"
+  },
+  {
+   "slug": "rust",
+   "name": "Rust"
+  },
+  {
+   "slug": "python",
+   "name": "Python"
+  },
+  {
+   "slug": "functional",
+   "name": "Functional & Lisp languages"
+  },
+  {
+   "slug": "go-zig-modern",
+   "name": "Go, Zig, Java & modern languages"
+  },
+  {
+   "slug": "javascript-typescript",
+   "name": "JavaScript & TypeScript"
+  },
+  {
+   "slug": "language-design",
+   "name": "Language design & type systems"
+  },
+  {
+   "slug": "first-steps",
+   "name": "Learn to code: courses & first steps"
+  }
+ ],
+ "compilers": [
+  {
+   "slug": "parsing",
+   "name": "Parsing & interpreters"
+  },
+  {
+   "slug": "jit-vms",
+   "name": "JITs, VMs & runtimes"
+  },
+  {
+   "slug": "optimization-codegen",
+   "name": "Optimization, LLVM & codegen"
+  }
+ ],
+ "systems": [
+  {
+   "slug": "os-internals",
+   "name": "OS internals & kernels"
+  },
+  {
+   "slug": "linux-unix",
+   "name": "Linux, Unix & BSD"
+  },
+  {
+   "slug": "containers-cloud-infra",
+   "name": "Containers & virtualization"
+  },
+  {
+   "slug": "windows-mac",
+   "name": "Windows & macOS"
+  },
+  {
+   "slug": "shells-terminals",
+   "name": "Shells & terminals"
+  }
+ ],
+ "performance": [
+  {
+   "slug": "cpu-caches-simd",
+   "name": "CPUs, caches & SIMD"
+  },
+  {
+   "slug": "gpu-parallel",
+   "name": "GPUs & parallel computing"
+  },
+  {
+   "slug": "concurrency",
+   "name": "Concurrency & lock-free"
+  },
+  {
+   "slug": "data-oriented",
+   "name": "Data-oriented design & game engines"
+  },
+  {
+   "slug": "profiling-optimization",
+   "name": "Profiling & optimization stories"
+  }
+ ],
+ "databases": [
+  {
+   "slug": "sql-engines",
+   "name": "SQL, Postgres & SQLite"
+  },
+  {
+   "slug": "db-internals",
+   "name": "Database internals"
+  },
+  {
+   "slug": "distributed-data",
+   "name": "Distributed data & streaming"
+  },
+  {
+   "slug": "data-tools",
+   "name": "Data tools & spreadsheets"
+  }
+ ],
+ "distributed": [
+  {
+   "slug": "system-design",
+   "name": "System design & architecture"
+  },
+  {
+   "slug": "consensus-consistency",
+   "name": "Consensus & consistency"
+  },
+  {
+   "slug": "cloud-reliability",
+   "name": "Cloud, DevOps & reliability"
+  },
+  {
+   "slug": "scale-stories",
+   "name": "Scaling stories"
+  }
+ ],
+ "web": [
+  {
+   "slug": "html-css",
+   "name": "HTML & CSS"
+  },
+  {
+   "slug": "frameworks",
+   "name": "JavaScript & frameworks"
+  },
+  {
+   "slug": "browsers",
+   "name": "Browsers & the web platform"
+  },
+  {
+   "slug": "backend-http",
+   "name": "HTTP, APIs & backends"
+  }
+ ],
+ "security": [
+  {
+   "slug": "exploits-reversing",
+   "name": "Exploits & reverse engineering"
+  },
+  {
+   "slug": "cryptography",
+   "name": "Cryptography"
+  },
+  {
+   "slug": "web-security",
+   "name": "Web security"
+  },
+  {
+   "slug": "hardware-hacking",
+   "name": "Hardware & console hacking"
+  },
+  {
+   "slug": "privacy-attacks",
+   "name": "Privacy, malware & attacks"
+  }
+ ],
+ "hardware": [
+  {
+   "slug": "build-a-computer",
+   "name": "Build a computer from scratch"
+  },
+  {
+   "slug": "cpu-architecture",
+   "name": "CPUs & computer architecture"
+  },
+  {
+   "slug": "chips-semiconductors",
+   "name": "Chips & semiconductors"
+  },
+  {
+   "slug": "memory-storage",
+   "name": "Memory & storage"
+  },
+  {
+   "slug": "devices-peripherals",
+   "name": "Devices, GPUs & peripherals"
+  }
+ ],
+ "graphics": [
+  {
+   "slug": "rendering-shaders",
+   "name": "Rendering & shaders"
+  },
+  {
+   "slug": "game-development",
+   "name": "Game development"
+  },
+  {
+   "slug": "simulation-procedural",
+   "name": "Simulation & procedural generation"
+  },
+  {
+   "slug": "classic-games-tech",
+   "name": "How classic games work"
+  },
+  {
+   "slug": "math-for-graphics",
+   "name": "Math for graphics"
+  },
+  {
+   "slug": "creative-coding",
+   "name": "Creative coding"
+  }
+ ],
+ "networking": [
+  {
+   "slug": "protocols",
+   "name": "Internet protocols"
+  },
+  {
+   "slug": "physical-networks",
+   "name": "Cables, radio & satellites"
+  },
+  {
+   "slug": "network-security",
+   "name": "Network security"
+  }
+ ],
+ "tools": [
+  {
+   "slug": "git",
+   "name": "Git & version control"
+  },
+  {
+   "slug": "editors",
+   "name": "Editors & IDEs"
+  },
+  {
+   "slug": "shell-cli",
+   "name": "Shell & command line"
+  },
+  {
+   "slug": "build-debug",
+   "name": "Build, debug & automation"
+  }
+ ],
+ "craft": [
+  {
+   "slug": "design-architecture",
+   "name": "Software design & architecture"
+  },
+  {
+   "slug": "testing-correctness",
+   "name": "Testing, debugging & correctness"
+  },
+  {
+   "slug": "classic-talks",
+   "name": "Classic talks & ideas"
+  },
+  {
+   "slug": "engineering-practice",
+   "name": "Engineering practice & teams"
+  }
+ ],
+ "careers": [
+  {
+   "slug": "startups",
+   "name": "Startups & founders"
+  },
+  {
+   "slug": "career-growth",
+   "name": "Careers, interviews & management"
+  },
+  {
+   "slug": "learning-communication",
+   "name": "Learning, speaking & research"
+  }
+ ],
+ "history": [
+  {
+   "slug": "people",
+   "name": "Pioneers & oral histories"
+  },
+  {
+   "slug": "documentaries",
+   "name": "Documentaries & stories"
+  },
+  {
+   "slug": "lectures-keynotes",
+   "name": "Landmark lectures & keynotes"
+  },
+  {
+   "slug": "early-computing",
+   "name": "Early computing"
+  }
+ ],
+ "retro": [
+  {
+   "slug": "restorations",
+   "name": "Restorations & repairs"
+  },
+  {
+   "slug": "retro-games",
+   "name": "Retro games & reverse engineering"
+  },
+  {
+   "slug": "vintage-machines",
+   "name": "Vintage computers & machines"
+  }
+ ],
+ "robotics": [
+  {
+   "slug": "control-theory",
+   "name": "Control theory & PID"
+  },
+  {
+   "slug": "estimation-mapping",
+   "name": "Estimation, SLAM & perception"
+  },
+  {
+   "slug": "kinematics-mechanics",
+   "name": "Kinematics, dynamics & actuators"
+  },
+  {
+   "slug": "robot-builds",
+   "name": "Robot builds & projects"
+  },
+  {
+   "slug": "robots-in-the-world",
+   "name": "Robots in the real world"
+  }
+ ],
+ "electronics": [
+  {
+   "slug": "fundamentals",
+   "name": "Electricity & component basics"
+  },
+  {
+   "slug": "tools-techniques",
+   "name": "Tools & techniques"
+  },
+  {
+   "slug": "circuit-design-pcb",
+   "name": "Circuit & PCB design"
+  },
+  {
+   "slug": "microcontrollers-iot",
+   "name": "Microcontrollers & IoT"
+  },
+  {
+   "slug": "rf-radio",
+   "name": "RF, radio & signals"
+  },
+  {
+   "slug": "power-motors",
+   "name": "Power, motors & high voltage"
+  },
+  {
+   "slug": "teardowns-repair",
+   "name": "Teardowns & repair"
+  }
+ ],
+ "space": [
+  {
+   "slug": "rockets-engines",
+   "name": "Rockets & engines"
+  },
+  {
+   "slug": "missions-spacecraft",
+   "name": "Missions, rovers & telescopes"
+  },
+  {
+   "slug": "aircraft",
+   "name": "Aircraft & aviation"
+  },
+  {
+   "slug": "orbits-physics",
+   "name": "Orbits & spaceflight physics"
+  },
+  {
+   "slug": "amateur-rocketry",
+   "name": "Amateur rocketry & builds"
+  }
+ ],
+ "physics": [
+  {
+   "slug": "electromagnetism",
+   "name": "Electricity & magnetism"
+  },
+  {
+   "slug": "quantum",
+   "name": "Quantum mechanics"
+  },
+  {
+   "slug": "relativity-cosmology",
+   "name": "Relativity, cosmology & space"
+  },
+  {
+   "slug": "energy-nuclear",
+   "name": "Energy, nuclear & fusion"
+  },
+  {
+   "slug": "light-waves-sound",
+   "name": "Light, waves & sound"
+  },
+  {
+   "slug": "mechanics-fluids",
+   "name": "Mechanics, fluids & heat"
+  },
+  {
+   "slug": "physics-courses",
+   "name": "Physics lectures & courses"
+  }
+ ],
+ "engineering": [
+  {
+   "slug": "civil-infrastructure",
+   "name": "Civil engineering & infrastructure"
+  },
+  {
+   "slug": "machines-mechanisms",
+   "name": "Machines & mechanisms"
+  },
+  {
+   "slug": "manufacturing-machining",
+   "name": "Manufacturing, machining & 3D printing"
+  },
+  {
+   "slug": "materials",
+   "name": "Materials science"
+  },
+  {
+   "slug": "vehicles-transport",
+   "name": "Vehicles & transport"
+  },
+  {
+   "slug": "everyday-tech",
+   "name": "How everyday things work"
+  }
+ ],
+ "making": [
+  {
+   "slug": "robots-machines",
+   "name": "Robots & automatic machines"
+  },
+  {
+   "slug": "vehicles-flying",
+   "name": "Vehicles, rockets & flying things"
+  },
+  {
+   "slug": "electronics-builds",
+   "name": "Electronics & computer builds"
+  },
+  {
+   "slug": "workshop-craft",
+   "name": "Workshop builds & craft"
+  }
+ ]
+}
