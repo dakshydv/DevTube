@@ -1,0 +1,46 @@
+@import "tailwindcss";
+
+:root {
+  --bg: #0b0b0f;
+  --bg-elev: #14141b;
+  --bg-hover: #1d1d27;
+  --border: #262633;
+  --fg: #ececf1;
+  --fg-muted: #9a9aab;
+  --accent: #ff6600; /* Hacker News orange */
+}
+
+@theme inline {
+  --color-bg: var(--bg);
+  --color-elev: var(--bg-elev);
+  --color-hover: var(--bg-hover);
+  --color-line: var(--border);
+  --color-fg: var(--fg);
+  --color-muted: var(--fg-muted);
+  --color-accent: var(--accent);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+}
+
+html {
+  color-scheme: dark;
+}
+
+body {
+  background: var(--bg);
+  color: var(--fg);
+}
+
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  scrollbar-width: none;
+}
+
+.line-clamp-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}

@@ -1,0 +1,155 @@
+[
+ {
+  "slug": "neural-networks-from-zero",
+  "name": "Neural Networks from Zero",
+  "description": "Build intuition with 3Blue1Brown's visuals, then write a neural network yourself with Karpathy, ending with a GPT built from scratch.",
+  "category": "ai-ml",
+  "videos": [
+   "aircAruvnKk",
+   "IHZwWFHWa-w",
+   "Ilg3gGewQ5U",
+   "tIeHLnjs5U8",
+   "VMj-3S1tku0",
+   "PaCmpygFfXo",
+   "TCH_1BHY58I",
+   "P6sfmUTpUmc",
+   "q8SA3rM6ckI",
+   "t3YJ5hKiMQ0",
+   "kCc8FmEb1nY"
+  ]
+ },
+ {
+  "slug": "understanding-llms",
+  "name": "Understanding LLMs",
+  "description": "What ChatGPT-style models are, how transformers and attention work, and how to use them well.",
+  "category": "ai-ml",
+  "videos": [
+   "LPZh9BOjkQs",
+   "zjkBMFhNj_g",
+   "wjZofJX0v4M",
+   "eMlx5fFNoYc",
+   "9-Jl0dxWQs8",
+   "7xTGNNLPyMI",
+   "EWvNQjAaOHw",
+   "LCEmiRjPEtQ",
+   "jkrNMKz9pWU",
+   "zduSFxRajkE",
+   "l8pRSuU81PU"
+  ]
+ },
+ {
+  "slug": "math-for-ml",
+  "name": "Math for Machine Learning",
+  "description": "The linear algebra, calculus and probability behind ML, explained visually.",
+  "category": "math",
+  "videos": [
+   "fNk_zzaMoSs",
+   "k7RM-ot2NWY",
+   "kYB8IZa5AuE",
+   "kjBOesZCoqc",
+   "WUvTyaaNkzM",
+   "HZGCoVF3YvM",
+   "spUNpyF58BY",
+   "KuXjwB4LzSA",
+   "ZK3O402wf1c"
+  ]
+ },
+ {
+  "slug": "programming-from-scratch",
+  "name": "Programming from Scratch",
+  "description": "Start with zero experience: computer science basics, your first language, then data structures and algorithms.",
+  "category": "languages",
+  "videos": [
+   "8mAITcNt710",
+   "x7X9w_GIm1s",
+   "rfscVS0vtbw",
+   "D6xkbGLQesk",
+   "8hly31xKli0",
+   "RBSGKlAvoiM",
+   "oBt53YbR9Kk"
+  ]
+ },
+ {
+  "slug": "web-development",
+  "name": "Web Development Foundations",
+  "description": "HTML, CSS and JavaScript, then the event loop, React and Node.",
+  "category": "web",
+  "videos": [
+   "7_LPdttKXPc",
+   "qz0aGYrrlhU",
+   "hu-q2zYwEYs",
+   "DHjqpvDnNGE",
+   "PkZNo7MFNFg",
+   "8aGhZQkoFbQ",
+   "Tn6-PIqc4UM",
+   "w7ejDZ8SWv8",
+   "Oe421EPjeBE"
+  ]
+ },
+ {
+  "slug": "how-computers-work",
+  "name": "How Computers Actually Work",
+  "description": "From transistors to breadboard CPUs, USB and memory: what really runs your code.",
+  "category": "hardware",
+  "videos": [
+   "CQtSS6g00h0",
+   "fCbAafKLqC8",
+   "-HNpim5x-IE",
+   "LnzuMJLZRdU",
+   "wdgULBpRoXk",
+   "N0O5Uwc3C0o",
+   "AHYNxpqKqwo",
+   "Tfh0ytz8S0k"
+  ]
+ },
+ {
+  "slug": "developer-toolbox",
+  "name": "The Developer's Toolbox",
+  "description": "The shell, git, Docker and Kubernetes: tools every engineer uses daily.",
+  "category": "tools",
+  "videos": [
+   "Z56Jmr9Z34Q",
+   "RGOj5yH7evk",
+   "2sjqTHE0zok",
+   "NTfOnGZUZDk",
+   "Gjnup-PuquQ",
+   "3c-iBn73dDE",
+   "X48VuDVv0do",
+   "GsMs3n8CB6g",
+   "PorfLSr3DDI"
+  ]
+ },
+ {
+  "slug": "systems-at-scale",
+  "name": "Systems at Scale",
+  "description": "System design basics, databases, microservices and the hard lessons of scaling.",
+  "category": "distributed",
+  "videos": [
+   "bUHFg8CZFws",
+   "xpDnVSmNFX0",
+   "HXV3zeQKqGY",
+   "Z_cX3bzkExE",
+   "CZ3wIuvmHeM",
+   "kb-m2fasdDY",
+   "3t6L-FlfeaI",
+   "cQP8WApzIQQ"
+  ]
+ },
+ {
+  "slug": "think-like-a-great-engineer",
+  "name": "Think Like a Great Engineer",
+  "description": "Classic talks on simplicity, craft, research and communication that people return to for years.",
+  "category": "craft",
+  "videos": [
+   "0SARbwvhupQ",
+   "Unzc731iCUY",
+   "SxdOUGdseq4",
+   "f84n5oFoZBc",
+   "PUv66718DII",
+   "8pTEmbeENF4",
+   "lKXe3HUG2l4",
+   "tD5NrevFtbU",
+   "a1zDuOPkMSw"
+  ]
+ }
+]
