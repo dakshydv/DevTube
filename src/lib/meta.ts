@@ -60,6 +60,8 @@ export interface Video {
   course?: string;
   /** Sub-topic slug within `category` (see SUBCATEGORIES); "<category>-more" for everything else. */
   sub: string;
+  /** Which of YouTube's auto-captured frames (1≈25%, 2≈50%, 3≈75% in) best represents the video. */
+  frame?: 1 | 2 | 3;
 }
 
 export interface LearningPath {
@@ -145,8 +147,18 @@ export const LEVELS: { slug: Level; name: string; hint: string }[] = [
 
 export const LEVEL_RANK: Record<Level, number> = { beginner: 0, intermediate: 1, advanced: 2 };
 
+/** The creator's uploaded thumbnail. */
 export function thumb(id: string): string {
   return `https://i.ytimg.com/vi/${id}/mqdefault.jpg`;
+}
+
+/**
+ * One of the three frames YouTube auto-captures from every video (~25%, 50% and 75% in). The dataset stores the most
+ * representative one per video (see `frame`); unknown videos use the middle frame. Unlike the uploaded thumbnail,
+ * nobody chose it, so it can't be clickbait.
+ */
+export function frameThumb(id: string, frame: number = 2): string {
+  return `https://i.ytimg.com/vi/${id}/mq${frame}.jpg`;
 }
 
 export function hnUrl(v: Video): string | null {

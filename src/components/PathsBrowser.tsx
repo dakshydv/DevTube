@@ -10,6 +10,7 @@ export interface PathItem {
   path: LearningPath;
   levels: Level[];
   runtime: number;
+  frames: Record<string, number | undefined>;
 }
 export interface PathSection {
   title: string;
@@ -135,7 +136,7 @@ export default function PathsBrowser({ sections }: { sections: PathSection[] }) 
                 <h3 className="mb-3 mt-6 text-sm font-medium uppercase tracking-wide text-muted">Learning paths</h3>
                 <div className={GRID}>
                   {s.paths.map((i) => (
-                    <PathCard key={i.path.slug} path={i.path} levels={i.levels} runtime={i.runtime} />
+                    <PathCard key={i.path.slug} path={i.path} levels={i.levels} runtime={i.runtime} frames={i.frames} />
                   ))}
                 </div>
               </>
@@ -145,7 +146,7 @@ export default function PathsBrowser({ sections }: { sections: PathSection[] }) 
                 <h3 className="mb-3 mt-8 text-sm font-medium uppercase tracking-wide text-muted">Full courses</h3>
                 <div className={GRID}>
                   {s.courses.map((i) => (
-                    <PathCard key={i.path.slug} path={i.path} levels={i.levels} runtime={i.runtime} />
+                    <PathCard key={i.path.slug} path={i.path} levels={i.levels} runtime={i.runtime} frames={i.frames} />
                   ))}
                 </div>
               </>

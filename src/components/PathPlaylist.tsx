@@ -2,8 +2,9 @@
 
 import Link from "next/link";
 import { CircleCheck, ListVideo, Play } from "lucide-react";
-import { formatRuntime, shortNumber, thumb, type Category, type LearningPath, type Video } from "@/lib/meta";
+import { formatRuntime, shortNumber, type Category, type LearningPath, type Video } from "@/lib/meta";
 import { actions, useUserState } from "@/lib/store";
+import ThumbImg from "./ThumbImg";
 import { DurationChip, LevelChip } from "./VideoCard";
 
 /** YouTube-style playlist page: blurred hero panel on the left, numbered list on the right. */
@@ -17,12 +18,10 @@ export default function PathPlaylist({ path, videos, cat }: { path: LearningPath
   return (
     <div className="flex flex-col gap-6 lg:flex-row lg:items-start">
       <section className="relative isolate overflow-hidden rounded-2xl p-4 sm:p-6 lg:sticky lg:top-20 lg:w-[360px] lg:shrink-0">
-        {/* eslint-disable-next-line @next/next/no-img-element */}
-        <img src={thumb(videos[0].id)} alt="" className="absolute inset-0 -z-20 h-full w-full scale-150 object-cover blur-3xl" />
+        <ThumbImg id={videos[0].id} frame={videos[0].frame} lazy={false} className="absolute inset-0 -z-20 h-full w-full scale-150 object-cover blur-3xl" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/30 via-black/60 to-bg/95" />
         <Link href={`/watch/${firstUnwatched.id}?path=${path.slug}`} className="group relative block overflow-hidden rounded-xl">
-          {/* eslint-disable-next-line @next/next/no-img-element */}
-          <img src={thumb(videos[0].id)} alt="" className="aspect-video w-full object-cover" />
+          <ThumbImg id={videos[0].id} frame={videos[0].frame} lazy={false} className="aspect-video w-full object-cover" />
           <span className="absolute inset-0 flex items-center justify-center gap-2 bg-black/60 text-sm font-medium opacity-0 transition group-hover:opacity-100">
             <Play className="h-5 w-5 fill-white" /> {label}
           </span>
@@ -55,8 +54,7 @@ export default function PathPlaylist({ path, videos, cat }: { path: LearningPath
               <span className="w-5 shrink-0 text-center text-xs text-muted sm:w-8 sm:text-sm">{i + 1}</span>
               <Link href={`/watch/${v.id}?path=${path.slug}`} className="flex min-w-0 flex-1 items-center gap-2 sm:gap-3">
                 <div className="relative aspect-video w-28 shrink-0 overflow-hidden rounded-lg sm:w-40">
-                  {/* eslint-disable-next-line @next/next/no-img-element */}
-                  <img src={thumb(v.id)} alt="" loading="lazy" className="h-full w-full object-cover" />
+                  <ThumbImg id={v.id} frame={v.frame} className="h-full w-full object-cover" />
                   <span className="absolute bottom-1 left-1 hidden sm:block"><LevelChip level={v.level} /></span>
                   <DurationChip seconds={v.duration} className="absolute bottom-1 right-1" />
                   {isDone && (

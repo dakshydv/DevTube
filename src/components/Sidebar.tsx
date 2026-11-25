@@ -4,6 +4,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import { Home, LayoutGrid, Library, ListVideo, type LucideIcon } from "lucide-react";
 import { CATEGORIES, type Category } from "@/lib/meta";
+import { actions, useUserState } from "@/lib/store";
 
 const MAIN: { href: string; label: string; icon: LucideIcon }[] = [
   { href: "/", label: "Home", icon: Home },
@@ -16,6 +17,7 @@ const GROUPS: Category["group"][] = ["Foundations", "Build the Future", "Buildin
 
 export default function Sidebar({ counts, onNavigate }: { counts: Record<string, number>; onNavigate?: () => void }) {
   const pathname = usePathname();
+  const { originalThumbs } = useUserState();
   return (
     <nav className="flex flex-col px-3 pb-6 pt-2 text-sm">
       <div className="border-b border-line pb-3">
@@ -55,6 +57,22 @@ export default function Sidebar({ counts, onNavigate }: { counts: Record<string,
           })}
         </div>
       ))}
+      <label className="mt-3 flex cursor-pointer items-start gap-3 rounded-[10px] px-3 py-2 hover:bg-hover">
+        <span className="min-w-0 flex-1">
+          <span className="block text-sm">No-clickbait thumbnails</span>
+          <span className="block text-xs leading-snug text-muted">Show a frame from inside each video instead of its uploaded thumbnail.</span>
+        </span>
+        <input
+          type="checkbox"
+          checked={!originalThumbs}
+          onChange={(e) => actions.setOriginalThumbs(!e.target.checked)}
+          className="peer sr-only"
+        />
+        <span
+          aria-hidden
+          className="relative mt-0.5 h-5 w-9 shrink-0 rounded-full bg-hover-strong transition-colors peer-checked:bg-fg after:absolute after:left-0.5 after:top-0.5 after:h-4 after:w-4 after:rounded-full after:bg-bg after:transition-transform peer-checked:after:translate-x-4"
+        />
+      </label>
       <p className="px-3 pt-4 text-xs leading-relaxed text-muted">
         The best of Hacker News and Lobsters, plus hand-picked channels and full university courses. All videos play
         from YouTube.

@@ -11,10 +11,12 @@ export interface UserState {
   watched: string[];
   saved: string[];
   level: Level | "all";
+  /** Show the creator's uploaded thumbnails instead of auto-captured video frames. */
+  originalThumbs: boolean;
 }
 
 const KEY = "devtube:v1";
-const EMPTY: UserState = { watched: [], saved: [], level: "all" };
+const EMPTY: UserState = { watched: [], saved: [], level: "all", originalThumbs: false };
 
 let state: UserState = EMPTY;
 let loaded = false;
@@ -96,6 +98,10 @@ export const actions = {
   setLevel(level: Level | "all") {
     load();
     setState({ ...state, level });
+  },
+  setOriginalThumbs(on: boolean) {
+    load();
+    setState({ ...state, originalThumbs: on });
   },
   clearHistory() {
     load();

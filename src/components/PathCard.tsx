@@ -2,10 +2,21 @@
 
 import Link from "next/link";
 import { ListVideo } from "lucide-react";
-import { CATEGORY_MAP, LEVEL_RANK, formatRuntime, thumb, type LearningPath, type Level } from "@/lib/meta";
+import { CATEGORY_MAP, LEVEL_RANK, formatRuntime, type LearningPath, type Level } from "@/lib/meta";
 import { useUserState } from "@/lib/store";
+import ThumbImg from "./ThumbImg";
 
-export default function PathCard({ path, levels, runtime = 0 }: { path: LearningPath; levels: Level[]; runtime?: number }) {
+export default function PathCard({
+  path,
+  levels,
+  runtime = 0,
+  frames = {},
+}: {
+  path: LearningPath;
+  levels: Level[];
+  runtime?: number;
+  frames?: Record<string, number | undefined>;
+}) {
   const { watched } = useUserState();
   const done = path.videos.filter((id) => watched.includes(id)).length;
   const pct = Math.round((done / path.videos.length) * 100);
@@ -20,8 +31,7 @@ export default function PathCard({ path, levels, runtime = 0 }: { path: Learning
     >
       <div className="relative grid aspect-[16/8] grid-cols-2 grid-rows-2 gap-px bg-bg">
         {path.videos.slice(0, 4).map((id) => (
-          // eslint-disable-next-line @next/next/no-img-element
-          <img key={id} src={thumb(id)} alt="" loading="lazy" className="h-full w-full object-cover" />
+          <ThumbImg key={id} id={id} frame={frames[id]} className="h-full w-full object-cover" />
         ))}
         <span className="absolute bottom-1 right-1 inline-flex items-center gap-1 rounded bg-black/80 px-1 py-px text-xs font-medium text-white">
           <ListVideo className="h-3.5 w-3.5" /> {path.videos.length} videos{runtime ? ` · ${formatRuntime(runtime)}` : ""}

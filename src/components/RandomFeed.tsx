@@ -34,7 +34,7 @@ import VideoCard from "./VideoCard";
 type FeedRow = [
   id: string, title: string, channel: string, category: CategorySlug, level: number, points: number, views: number,
   year: number, duration: number, flags: number, course: string, lbScore: number, lbId: string, hnId: string,
-  comments: number, sub: string, tags: string,
+  comments: number, sub: string, tags: string, frame: 1 | 2 | 3,
 ];
 
 const STEP = 24;
@@ -42,9 +42,9 @@ const SEED_KEY = "devtube:feed-seed";
 const GRID = "grid grid-cols-[repeat(auto-fill,minmax(290px,1fr))] gap-x-4 gap-y-8";
 
 function toVideo(r: FeedRow): Video {
-  const [id, title, channel, category, lvl, points, views, year, duration, flags, course, lbScore, lbId, hnId, comments, sub, tags] = r;
+  const [id, title, channel, category, lvl, points, views, year, duration, flags, course, lbScore, lbId, hnId, comments, sub, tags, frame] = r;
   return {
-    id, title, ytTitle: null, channel, category, sub, tags: [category, ...(tags ? (tags.split(" ") as CategorySlug[]) : [])], level: LEVELS[lvl].slug, points, comments,
+    id, title, ytTitle: null, channel, category, sub, frame, tags: [category, ...(tags ? (tags.split(" ") as CategorySlug[]) : [])], level: LEVELS[lvl].slug, points, comments,
     hnId: hnId || null, year: year || null, duration: duration || null, curated: !!(flags & 1), inspire: !!(flags & 2),
     source: hnId ? "hn" : "channel", views: views || null, course: course || undefined,
     lbScore: lbScore || undefined, lbId: lbId || null,

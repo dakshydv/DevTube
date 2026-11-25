@@ -40,6 +40,7 @@ export default function PathsPage() {
       path,
       levels: levels(path.videos),
       runtime: pathRuntime(path.videos),
+      frames: Object.fromEntries(path.videos.slice(0, 4).map((id) => [id, getVideo(id)?.frame])),
     })),
   }));
   return (

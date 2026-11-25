@@ -13,8 +13,9 @@ import {
   MoreVertical,
   Sparkles,
 } from "lucide-react";
-import { formatDuration, hnUrl, lobstersUrl, shortNumber, thumb, type Level, type Video } from "@/lib/meta";
+import { formatDuration, hnUrl, lobstersUrl, shortNumber, type Level, type Video } from "@/lib/meta";
 import { actions, useUserState } from "@/lib/store";
+import ThumbImg from "./ThumbImg";
 
 const LEVEL_DOT: Record<Level, string> = {
   beginner: "bg-emerald-400",
@@ -46,8 +47,7 @@ export function DurationChip({ seconds, className = "" }: { seconds: number | nu
 function Thumb({ video, watched, small = false, className = "" }: { video: Video; watched: boolean; small?: boolean; className?: string }) {
   return (
     <div className={`relative aspect-video overflow-hidden bg-hover ${className}`}>
-      {/* eslint-disable-next-line @next/next/no-img-element */}
-      <img src={thumb(video.id)} alt="" loading="lazy" className={`h-full w-full object-cover ${watched ? "opacity-70" : ""}`} />
+      <ThumbImg id={video.id} frame={video.frame} className={`h-full w-full object-cover ${watched ? "opacity-70" : ""}`} />
       {!small && <LevelChip level={video.level} className="absolute bottom-1 left-1" />}
       <DurationChip seconds={video.duration} className="absolute bottom-1 right-1" />
       {watched && (

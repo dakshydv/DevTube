@@ -24,6 +24,7 @@ export async function GET() {
     v.comments,
     v.sub,
     v.tags.filter((t) => t !== v.category).join(" "),
+    v.frame ?? 2,
   ]);
   return Response.json(rows);
 }
